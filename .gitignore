@@ -32,3 +32,4 @@
 *.app
 /simple-vector/build-simple_vector-Qt_6_4_1_MinGW11_2_0-Debug/
 /simple-vector/simple_vector.pro.user
+/Debug/

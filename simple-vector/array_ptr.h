@@ -17,9 +17,6 @@ public:
         if (size) {
             raw_ptr_ = new Type[size];
         }
-        else {
-            raw_ptr_ = nullptr;
-        }
     }
 
     // Конструктор из сырого указателя, хранящего адрес массива в куче либо nullptr
@@ -75,7 +72,7 @@ public:
 
     // Возвращает true, если указатель ненулевой, и false в противном случае
     explicit operator bool() const {
-        return raw_ptr_ ? true : false;
+        return raw_ptr_;
     }
 
     // Возвращает значение сырого указателя, хранящего адрес начала массива
@@ -85,30 +82,9 @@ public:
 
     // Обменивается значениям указателя на массив с объектом other
     void swap(ArrayPtr& other) noexcept {
-        Type* copy = other.Get();
-        other.raw_ptr_ = raw_ptr_;
-        raw_ptr_ = copy;
+        std::swap(this->raw_ptr_, other.raw_ptr_);
     }
 
 private:
     Type* raw_ptr_ = nullptr;
 };
-
-void TestArrayPtr() {
-    ArrayPtr<int> numbers(10);
-    const auto& const_numbers = numbers;
-
-    numbers[2] = 42;
-    assert(const_numbers[2] == 42);
-    assert(&const_numbers[2] == &numbers[2]);
-
-    assert(numbers.Get() == &numbers[0]);
-
-    ArrayPtr<int> numbers_2(5);
-    numbers_2[2] = 43;
-
-    numbers.swap(numbers_2);
-
-    assert(numbers_2[2] == 42);
-    assert(numbers[2] == 43);
-}
