@@ -377,15 +377,6 @@ inline bool operator>=(const SimpleVector<Type>& lhs, const SimpleVector<Type>& 
     return (lhs == rhs) || (rhs < lhs);
 }
 
-void PrintSimpleVector(SimpleVector<int> v) {
-    using namespace std::literals;
-    for (auto& e : v) {
-        std::cout << e << " "s;
-    }
-    std::cout << std::endl;
-}
-
-ReserveProxyObj Reserve(size_t capacity_to_reserve) {
-    return ReserveProxyObj(capacity_to_reserve);
-}
+void PrintSimpleVector(SimpleVector<int> v);
+ReserveProxyObj Reserve(size_t capacity_to_reserve);
 
